@@ -53,7 +53,7 @@ goal = {"G1": (3, 7),
         }
 
 
-file_path = 'C:/newFile.txt'
+file_path = 'maze.txt'
 graph = maze(file_path)
 
 cost, path, expanded_nodes = a_star_search(graph, (3, 2), goals, traps)

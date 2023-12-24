@@ -29,7 +29,7 @@ def greedy_best_first_search(graph, start, goals, traps):
         expanded_nodes.add(node)
 
         if node in traps:
-            continue  # Skipping traps
+            cost += 6  # Skipping traps
 
         if node in goals:
             return cost, path + [node], expanded_nodes  # Return cost, path, and expanded nodes
@@ -51,7 +51,7 @@ goal = {"G1": (3, 7),
         }
 
 
-file_path = 'C:/maze.txt'
+file_path = 'maze.txt'
 graph = maze(file_path)
 
 cost, path, expanded_nodes = greedy_best_first_search(graph, (3, 2), goals, traps)
