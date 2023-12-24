@@ -25,5 +25,6 @@ The cost of each move is one point.
 
 When the agent moves into a trap square, the cost of the move increases by 6 (total cost of the move becomes 7).
 
+![maze](https://github.com/farukks/2DMazeSolver/assets/105118417/017c9543-0d4d-4c1c-b225-85e7d7ba386d)
 
-![maze](https://github.com/farukks/2D-Maze-Solver/assets/105118417/f6437ade-ca71-492b-ac30-0bcca960a2b0)
+
