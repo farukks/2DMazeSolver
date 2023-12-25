@@ -29,7 +29,8 @@ def greedy_best_first_search(graph, start, goals, traps):
         expanded_nodes.add(node)
 
         if node in traps:
-            cost += 6  # Skipping traps
+            cost += 6
+            continue # Skipping traps
 
         if node in goals:
             return cost, path + [node], expanded_nodes  # Return cost, path, and expanded nodes
