@@ -54,7 +54,7 @@ def depth_first_search(root_node, graph, goals, traps):
 # 'tree.txt' dosyasından veri okuma ve graph oluşturma
 graph = {}
 
-with open('tree.txt', 'r') as file:
+with open('maze.txt', 'r') as file:
     for line in file:
         line = line.strip()
         parts = line.split(':')
