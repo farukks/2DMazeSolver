@@ -23,11 +23,11 @@ def depth_limited_search(graph, start, goal, depth, traps, cost_so_far):
         best_expanded_nodes = set()
 
         for neighbor in graph.get(start, []):
-            trap_cost = 6 if neighbor in traps else 1
+            trap_cost = 7 if neighbor in traps else 1
             next_cost = cost_so_far + trap_cost
 
             # Tuzaktan geçme koşulunu kontrol et
-            if trap_cost > 1 and next_cost > cost_so_far + 6:
+            if trap_cost > 1 and next_cost > cost_so_far + 7:
                 continue
 
             sub_cost, sub_path, sub_nodes = depth_limited_search(graph, neighbor, goal, depth - 1, traps, next_cost)
