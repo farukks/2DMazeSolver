@@ -13,29 +13,44 @@ def maze(file_path):
     return graph
 
 
-# Derinlik sınırlı arama fonksiyonu
-def depth_limited_search(graph, start, goal, depth, traps):
+def depth_limited_search(graph, start, goal, depth, traps, cost_so_far):
     if depth == 0 and start in goal:
-        return 0, [start], {start}  # Cost, Path, Expanded Nodes
+        return cost_so_far, [start], {start}  # Cost, Path, Expanded Nodes
     if depth > 0:
         expanded_nodes = {start}
+        min_cost = float('inf')
+        best_path = []
+        best_expanded_nodes = set()
+
         for neighbor in graph.get(start, []):
-            if neighbor in traps:
-                continue  # Skip traps in depth-limited search
-            cost, path, nodes = depth_limited_search(graph, neighbor, goal, depth - 1, traps)
-            if cost != float('inf'):
-                return cost + 1, [start] + path, expanded_nodes.union(nodes)
+            trap_cost = 6 if neighbor in traps else 1
+            next_cost = cost_so_far + trap_cost
+
+            # Tuzaktan geçme koşulunu kontrol et
+            if trap_cost > 1 and next_cost > cost_so_far + 6:
+                continue
+
+            sub_cost, sub_path, sub_nodes = depth_limited_search(graph, neighbor, goal, depth - 1, traps, next_cost)
+            expanded_nodes = expanded_nodes.union(sub_nodes)  # Başarısız yolları da dahil et
+            if sub_cost < min_cost:
+                min_cost = sub_cost
+                best_path = [start] + sub_path
+                best_expanded_nodes = expanded_nodes
+
+        if min_cost != float('inf'):
+            return min_cost, best_path, best_expanded_nodes
         return float('inf'), [], expanded_nodes
     return float('inf'), [], {start}
+
+# Diğer fonksiyonlar ve kodlar aynı kalacak
 
 # İteratif derinleşme araması fonksiyonu
 def iterative_deepening_search(graph, start, goals, traps):
     for depth in range(len(graph)):
-        cost, path, expanded_nodes = depth_limited_search(graph, start, goals, depth, traps)
+        cost, path, expanded_nodes = depth_limited_search(graph, start, goals, depth, traps, 0)
         if cost != float('inf'):
             return cost, path, expanded_nodes
     return float('inf'), [], set()
-
 # Example usage
 
 
